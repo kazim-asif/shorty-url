@@ -1,6 +1,6 @@
 # URL Shortener API
 
-A professional URL shortener service built with Go and Beego framework, demonstrating software engineering best practices including clean architecture, comprehensive testing, analytics, and production-ready features.
+A professional URL shortener service built with Go and Beego framework, demonstrating software engineering best practices including clean architecture, comprehensive testing, analytics, and advanced features.
 
 ## Features
 
@@ -203,41 +203,11 @@ The API implements token bucket rate limiting:
 
 Rate limits apply to `/api/*` endpoints only.
 
-## Production Deployment
-
-### Docker (Recommended)
-```dockerfile
-FROM golang:1.19-alpine AS builder
-WORKDIR /app
-COPY . .
-RUN go mod tidy && go build -o shorty-url main.go
-
-FROM alpine:latest
-RUN apk --no-cache add ca-certificates
-WORKDIR /root/
-COPY --from=builder /app/shorty-url .
-COPY --from=builder /app/conf ./conf
-CMD ["./shorty-url"]
-```
-
 ### Environment Variables
 ```bash
 export BEEGO_RUNMODE=prod
 export PORT=8080
 ```
-
-### Database Integration
-The current implementation uses in-memory storage for simplicity. For production:
-
-1. **PostgreSQL Integration**:
-   ```go
-   import _ "github.com/lib/pq"
-   ```
-
-2. **MySQL Integration**:
-   ```go
-   import _ "github.com/go-sql-driver/mysql"
-   ```
 
 ## Performance Considerations
 
@@ -271,7 +241,7 @@ The current implementation uses in-memory storage for simplicity. For production
 
 ### Headers
 - Proper CORS configuration
-- Security headers for production deployment
+- Security headers
 
 ## Development
 
@@ -310,6 +280,3 @@ This URL shortener demonstrates several advanced software engineering concepts:
 6. **Performance Optimization**: Efficient algorithms and data structures
 7. **Security Best Practices**: Input validation and rate limiting
 8. **Observability**: Comprehensive logging and analytics
-9. **Production Readiness**: Docker support and deployment considerations
-
-This project showcases production-ready Go development skills suitable for senior software engineering positions.
